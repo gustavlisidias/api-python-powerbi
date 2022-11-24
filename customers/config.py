@@ -3,15 +3,15 @@ class BaseConfig(object):
     AUTHENTICATION_MODE = 'ServicePrincipal'
 
     # Workspace Id in which the report is present 
-    WORKSPACE_ID = '55517cfe-0878-456d-ab5f-154674a2625f'
+    WORKSPACE_ID = ''
     
     # Report Id for which Embed token needs to be generated 
-    REPORT_ID = '0f36ab34-80d8-48a8-8222-f65e40d323f7' 
+    REPORT_ID = '' 
     
     # IDs of the Azure
-    TENANT_ID = '5172280b-54ac-44c1-949a-893f3ee9542f'
-    CLIENT_ID = '24f20447-28d6-4dff-8dff-ed8dd1deb4da'
-    CLIENT_SECRET = 'mOJ8Q~p~vEtbtB2IDxYhyekXbQMz6q_~gT4eMcWC'
+    TENANT_ID = ''
+    CLIENT_ID = ''
+    CLIENT_SECRET = ''
     
     # Scope of AAD app. Use the below configuration to use all the permissions provided in the AAD app through Azure portal. 
     SCOPE = ['https://analysis.windows.net/powerbi/api/.default']
