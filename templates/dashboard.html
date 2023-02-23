@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Dashboard</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='template/assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='template/assets/vendors/chartjs/Chart.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='template/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='template/assets/css/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+    
+</head>
+
+<body>
+    <!-- PAGE COMPLETA -->
+    <div id="app">
+
+        <!-- MENU -->
+        <div id="sidebar" class='active'>
+            <div class="sidebar-wrapper active">
+
+                <!-- LOGO -->
+                <div class="sidebar-header">
+                    <p style="font-size: 12px">Colorado Máquinas <img style="width: 80px; height: 20px;" src="../static/img/logo1.JPG"></p>
+                </div>
+
+                <!-- NAVEGAÇÃO LATERAL  -->
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        {% if user.group == "Peças" %}
+                        <li class="sidebar-item active">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Peças & Acessórios</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.group == "Serviços" %}
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-toolbox"></i>
+                                <span>Serviços</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.group == "Vendas" %}
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-coins"></i>
+                                <span>Vendas & Gerencial</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.group == "Máquinas" %}
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-tractor"></i>
+                                <span>Máquinas</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.group == "Diretoria" %}
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-chart-pie"></i>
+                                <span>Diretoria</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.group == "Prospecção de Clientes" %}
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-address-card"></i>
+                                <span>Prospecção de Clientes</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.group == "Contabilidade" %}
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-scale-balanced"></i>
+                                <span>Contabilidade</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.group == "Financeiro" %}
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fa-solid fa-brazilian-real-sign"></i>
+                                <span>Financeiro</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <div id="main">
+            <nav class="navbar navbar-header navbar-expand navbar-light">
+                <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
+                <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav d-flex align-items-center navbar-light ml-auto">
+                        <a class="dropdown-item" href="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- DASHBOARD -->
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <h3>{{user.name_surname}}</h3>
+                    <p class="text-subtitle text-muted">Bem-vindo, veja abaixo seus dashboards</p>
+                </div>
+    
+                <!-- SECTION DA API -->
+                <section id="text-container" class="embed-container col-lg-4 col-md-4 col-sm-4 mb-5 ml-5 mt-5"></section>
+                <section style="width: 100%; height: 55rem" id="report-container" class="embed-container col-lg-offset-4 col-lg-7 col-md-offset-5 col-md-7 col-sm-offset-5 col-sm-7 mt-5"></section>
+                <section class="error-container m-5"></section>
+
+                <!-- SCRIPTS DA API -->
+                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/powerbi-client/2.15.1/powerbi.min.js"></script>
+                <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+            </div>
+
+            <!-- FOOTER -->
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-left">
+                        <p>&copy; Colorado Máquinas - 2022</p>
+                    </div>
+                    <div class="float-right">
+                        <p>Dashboard * Power BI by Gustavo Lisi</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="{{ url_for('static', filename='template/assets/js/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='template/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='template/assets/js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='template/assets/vendors/chartjs/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='template/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='template/assets/js/pages/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='template/assets/js/main.js') }}"></script>
+
+</body>
+
+</html>
